@@ -1,0 +1,283 @@
+{
+	"products": [
+        {
+            "id": 1,
+            "title": "iPhone 14 Pro",
+            "description": "L'iPhone definitivo",
+            "price": 999,
+            "discountPercentage": 12.96,
+            "rating": 4.69,
+            "stock": 94,
+            "brand": "Apple",
+            "category": "smartphones",
+            "thumbnail": "iphone14pro",
+            "images": ["___", "___", "___"]
+        },
+        
+        {
+            "id": 2,
+            "title": "Pixel 7 Pro",
+            "description": "Il telefono Google migliore di sempre",
+            "price": 899,
+            "discountPercentage": 12.96,
+            "rating": 4.69,
+            "stock": 94,
+            "brand": "Google",
+            "category": "smartphones",
+            "thumbnail": "pixel7pro",
+            "images": ["___", "___", "___"]
+        },
+        
+        {
+            "id": 3,
+            "title": "Mac Sudio",
+            "description": "Potenza da favola",
+            "price": 2449,
+            "discountPercentage": 12.96,
+            "rating": 4.69,
+            "stock": 94,
+            "brand": "Apple",
+            "category": "computer",
+            "thumbnail": "macstudio",
+            "images": ["___", "___", "___"]
+        },
+        
+        {
+            "id": 4,
+            "title": "Surface Pro 9",
+            "description": "La potenza di un portatile, la flessibilità di un tablet",
+            "price": 1329,
+            "discountPercentage": 12.96,
+            "rating": 4.69,
+            "stock": 94,
+            "brand": "Microsoft",
+            "category": "computer",
+            "thumbnail": "surfacepro9",
+            "images": ["___", "___", "___"]
+        },
+        
+        {
+            "id": 5,
+            "title": "iPhone 9",
+            "description": "An apple mobile which is nothing like apple",
+            "price": 549,
+            "discountPercentage": 12.96,
+            "rating": 4.69,
+            "stock": 94,
+            "brand": "Apple",
+            "category": "smartphones",
+            "thumbnail": "surfacepro9",
+            "images": ["___", "___", "___"]
+        },
+        
+        {
+            "id": 6,
+            "title": "iPhone 9",
+            "description": "An apple mobile which is nothing like apple",
+            "price": 549,
+            "discountPercentage": 12.96,
+            "rating": 4.69,
+            "stock": 94,
+            "brand": "Apple",
+            "category": "smartphones",
+            "thumbnail": "surfacepro9",
+            "images": ["___", "___", "___"]
+        },
+        
+        {
+            "id": 7,
+            "title": "iPhone 9",
+            "description": "An apple mobile which is nothing like apple",
+            "price": 549,
+            "discountPercentage": 12.96,
+            "rating": 4.69,
+            "stock": 94,
+            "brand": "Apple",
+            "category": "smartphones",
+            "thumbnail": "surfacepro9",
+            "images": ["___", "___", "___"]
+        },
+        
+        {
+            "id": 8,
+            "title": "iPhone 9",
+            "description": "An apple mobile which is nothing like apple",
+            "price": 549,
+            "discountPercentage": 12.96,
+            "rating": 4.69,
+            "stock": 94,
+            "brand": "Apple",
+            "category": "smartphones",
+            "thumbnail": "surfacepro9",
+            "images": ["___", "___", "___"]
+        },
+        
+        {
+            "id": 9,
+            "title": "iPhone 9",
+            "description": "An apple mobile which is nothing like apple",
+            "price": 549,
+            "discountPercentage": 12.96,
+            "rating": 4.69,
+            "stock": 94,
+            "brand": "Apple",
+            "category": "smartphones",
+            "thumbnail": "surfacepro9",
+            "images": ["___", "___", "___"]
+        },
+        
+        {
+            "id": 10,
+            "title": "iPhone 9",
+            "description": "An apple mobile which is nothing like apple",
+            "price": 549,
+            "discountPercentage": 12.96,
+            "rating": 4.69,
+            "stock": 94,
+            "brand": "Apple",
+            "category": "smartphones",
+            "thumbnail": "surfacepro9",
+            "images": ["___", "___", "___"]
+        },
+        
+        {
+            "id": 11,
+            "title": "iPhone 9",
+            "description": "An apple mobile which is nothing like apple",
+            "price": 549,
+            "discountPercentage": 12.96,
+            "rating": 4.69,
+            "stock": 94,
+            "brand": "Apple",
+            "category": "smartphones",
+            "thumbnail": "surfacepro9",
+            "images": ["___", "___", "___"]
+        },
+        
+        {
+            "id": 12,
+            "title": "iPhone 9",
+            "description": "An apple mobile which is nothing like apple",
+            "price": 549,
+            "discountPercentage": 12.96,
+            "rating": 4.69,
+            "stock": 94,
+            "brand": "Apple",
+            "category": "smartphones",
+            "thumbnail": "surfacepro9",
+            "images": ["___", "___", "___"]
+        },
+        
+        {
+            "id": 13,
+            "title": "iPhone 9",
+            "description": "An apple mobile which is nothing like apple",
+            "price": 549,
+            "discountPercentage": 12.96,
+            "rating": 4.69,
+            "stock": 94,
+            "brand": "Apple",
+            "category": "smartphones",
+            "thumbnail": "surfacepro9",
+            "images": ["___", "___", "___"]
+        },
+        
+        {
+            "id": 14,
+            "title": "iPhone 9",
+            "description": "An apple mobile which is nothing like apple",
+            "price": 549,
+            "discountPercentage": 12.96,
+            "rating": 4.69,
+            "stock": 94,
+            "brand": "Apple",
+            "category": "smartphones",
+            "thumbnail": "surfacepro9",
+            "images": ["___", "___", "___"]
+        },
+        
+        {
+            "id": 15,
+            "title": "iPhone 9",
+            "description": "An apple mobile which is nothing like apple",
+            "price": 549,
+            "discountPercentage": 12.96,
+            "rating": 4.69,
+            "stock": 94,
+            "brand": "Apple",
+            "category": "smartphones",
+            "thumbnail": "surfacepro9",
+            "images": ["___", "___", "___"]
+        },
+        
+        {
+            "id": 16,
+            "title": "iPhone 9",
+            "description": "An apple mobile which is nothing like apple",
+            "price": 549,
+            "discountPercentage": 12.96,
+            "rating": 4.69,
+            "stock": 94,
+            "brand": "Apple",
+            "category": "smartphones",
+            "thumbnail": "surfacepro9",
+            "images": ["___", "___", "___"]
+        },
+        
+        {
+            "id": 17,
+            "title": "iPhone 9",
+            "description": "An apple mobile which is nothing like apple",
+            "price": 549,
+            "discountPercentage": 12.96,
+            "rating": 4.69,
+            "stock": 94,
+            "brand": "Apple",
+            "category": "smartphones",
+            "thumbnail": "surfacepro9",
+            "images": ["___", "___", "___"]
+        },
+        
+        {
+            "id": 18,
+            "title": "iPhone 9",
+            "description": "An apple mobile which is nothing like apple",
+            "price": 549,
+            "discountPercentage": 12.96,
+            "rating": 4.69,
+            "stock": 94,
+            "brand": "Apple",
+            "category": "smartphones",
+            "thumbnail": "surfacepro9",
+            "images": ["___", "___", "___"]
+        },
+        
+        {
+            "id": 19,
+            "title": "iPhone 9",
+            "description": "An apple mobile which is nothing like apple",
+            "price": 549,
+            "discountPercentage": 12.96,
+            "rating": 4.69,
+            "stock": 94,
+            "brand": "Apple",
+            "category": "smartphones",
+            "thumbnail": "surfacepro9",
+            "images": ["___", "___", "___"]
+        },
+
+        {
+            "id": 20,
+            "title": "iPhone 9",
+            "description": "An apple mobile which is nothing like apple",
+            "price": 549,
+            "discountPercentage": 12.96,
+            "rating": 4.69,
+            "stock": 94,
+            "brand": "Apple",
+            "category": "smartphones",
+            "thumbnail": "surfacepro9",
+            "images": ["___", "___", "___"]
+        }
+    ]
+}
