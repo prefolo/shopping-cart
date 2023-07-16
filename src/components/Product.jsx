@@ -1,14 +1,14 @@
 import React from 'react'
 import images from '../images';
 
-const Product = ({thumbnail,title,description,price,brand,category}) => {
+const Product = ({item}) => {
   return ( 
     <div className='product'>
-        <p className='title'>{title}</p>
-        <p className='desc'>{description}</p>
-        <img src={images[thumbnail]}/>
+        <p className='title'>{item.title}</p>
+        <p className='desc'>{item.description}</p>
+        <img src={images[item.thumbnail]}/>
         <div className="button-container">       
-            <button className="price">{`${price} €`}</button>
+            <button className="price">{`${item.price} €`}</button>
         </div>
     </div>
    );

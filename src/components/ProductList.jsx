@@ -9,7 +9,7 @@ const ProductList = () => {
   //console.log( prds )
 
   const listItems = prds.map((p) => {
-    return <Product thumbnail={p.thumbnail} title={p.title} description={p.description} price={p.price} brand={p.brand} category={p.category} />
+    return <Product key={p.id} item={p} />
   })
 
   return (
