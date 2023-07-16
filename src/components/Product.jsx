@@ -10,11 +10,8 @@ const Product = ({thumbnail,title,description,price,brand,category}) => {
             <div className='info-container'>
                 <p>{description}</p>
                 <div className="product-footer-container">
-                    <p className="price">{price}</p>
-                    <div>
-                        <p className="brand">{brand}</p>
-                        <p className="category">{category}</p>
-                    </div>
+                    <button className="price">{`${price} €`}</button>
+
                 </div>
             </div>
         </div>
