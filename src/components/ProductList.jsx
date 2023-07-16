@@ -2,13 +2,17 @@ import React from 'react'
 import Product from './Product'
 import data from '../data/products.json';
 
-const ProductList = () => {
+const ProductList = ({filterbrand,filtercategory}) => {
   let prds = [ ...data.products ];
   prds.sort((a,b)=>{ return a.title.toLowerCase() > b.title.toLowerCase() ? 1 : -1 })
 
-  //console.log( prds )
+  const a = filterbrand != "All" ? prds.filter(p=>p.brand==filterbrand) : [...prds];
+  const b = filtercategory != "All" ? a.filter(p=>p.category==filtercategory) : 0;
+  const result = b ? [...b] : [...a];
 
-  const listItems = prds.map((p) => {
+  console.log( result )
+
+  const listItems = result.map((p) => {
     return <Product key={p.id} item={p} />
   })
 
