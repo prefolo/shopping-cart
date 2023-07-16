@@ -62,7 +62,7 @@
 
 .product .title {
   padding: 20px 0;
-  padding-bottom: 10px;
+  padding-bottom: 0;
   font-weight: 800;
   color: #555555;
   text-align: center;
@@ -71,6 +71,8 @@
 .product .desc {
   text-align: center;
   font: 13px Geneva;
+  margin-bottom: 20px;
+  color: #858585;
 }
 
 .product .button-container {
@@ -82,8 +84,13 @@
   border-radius: 5px;
   background-color: #545454;
   color: #fff;
-  margin-right: 10px;
   min-width: 60px;
   text-align: center;
   max-width: 200px;
+}
+
+.product .brand {
+  color: #888;
+  font-size: 13px;
+  text-align: center;
 }
