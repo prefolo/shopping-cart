@@ -10,7 +10,7 @@ const ProductList = ({filterbrand,filtercategory}) => {
   const b = filtercategory != "All" ? a.filter(p=>p.category==filtercategory) : 0;
   const result = b ? [...b] : [...a];
 
-  console.log( result )
+  //console.log( result )
 
   const listItems = result.map((p) => {
     return <Product key={p.id} item={p} />
