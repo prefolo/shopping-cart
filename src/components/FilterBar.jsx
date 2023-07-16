@@ -16,9 +16,11 @@ const FilterBar = ({onChangeBrand,onChangeCategory}) => {
 
   return (
     <div id='filter-bar'>
+      <label>Brand</label>
       <select onChange={onChangeBrand}>
         {optionsBrands}
       </select>
+      <label>Category</label>
       <select onChange={onChangeCategory}>
         {optionsCategories}
       </select>

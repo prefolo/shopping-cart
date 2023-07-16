@@ -2,7 +2,7 @@ import React from 'react'
 import Product from './Product'
 import data from '../data/products.json';
 
-const ProductList = ({filterbrand,filtercategory}) => {
+const ProductList = ({filterbrand,filtercategory,itemcountChangeHandler}) => {
   let prds = [ ...data.products ];
   prds.sort((a,b)=>{ return a.title.toLowerCase() > b.title.toLowerCase() ? 1 : -1 })
 
@@ -13,7 +13,7 @@ const ProductList = ({filterbrand,filtercategory}) => {
   //console.log( result )
 
   const listItems = result.map((p) => {
-    return <Product key={p.id} item={p} />
+    return <Product key={p.id} item={p} itemcountChangeHandler={itemcountChangeHandler}/>
   })
 
   return (
