@@ -79,11 +79,7 @@ button:focus-visible {
   'opsz' 48
 }
 
-
-.material-symbols-outlined2 {
-  font-variation-settings:
-  'FILL' 0,
-  'wght' 400,
-  'GRAD' 0,
-  'opsz' 48
+#links-container{
+  display: flex;
+  gap: 20px;
 }

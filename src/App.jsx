@@ -1,7 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import './App.css'
 import ProductList from "./components/ProductList";
 import FilterBar from "./components/FilterBar";
+import Header from './components/Header';
+import { Purchasescontext } from './contexts/Purchasescontext';
 
 function App() {
   const [filterbrand, setFilterbrand] = useState("All")
@@ -34,10 +36,9 @@ function App() {
   return (
     <>
       <div id="sticky-top-bar">
-        <div id="header">
-          <p>Market Place</p>
-          <button id="cart-button"><span className="material-symbols-outlined">shopping_cart</span> { productsincart.length }</button>
-        </div>
+        <Purchasescontext.Provider value={{ productsincart, setProductsincart }}>
+          <Header />
+        </Purchasescontext.Provider>
         <div id="current-page-section">
           <div id="title">Store</div>
           <div id="filter-container">
