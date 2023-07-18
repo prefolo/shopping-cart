@@ -1,14 +1,20 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useEffect } from 'react'
 import './Shop.css'
 import ProductList from "./components/ProductList";
 import { useNavigate } from 'react-router-dom';
 
 
 
-function Shop({cart, cartChangeHandler, cancelCartHandler}) {
+function Shop({cart, setCart, cartChangeHandler, cancelCartHandler}) {
   const [filterbrand, setFilterbrand] = useState("All")
   const [filtercategory, setFiltercategory] = useState("All")
   const navigate = useNavigate()
+
+  useEffect(() => {
+    const data = window.localStorage.getItem('prefolo.github.shopping-cart.state');
+    if ( data !== null ) setCart(JSON.parse(data));
+  }, []);
+
 
   function onChangeBrand(e) {
     setFilterbrand(e.target.value)
@@ -44,7 +50,7 @@ function Shop({cart, cartChangeHandler, cancelCartHandler}) {
       </div>
       <div id="content">
           <button onClick={cancelCartHandler}>Cancel Cart</button>
-          <ProductList filterbrand={filterbrand} filtercategory={filtercategory} cartChangeHandler={cartChangeHandler}/>
+          <ProductList cart={cart} filterbrand={filterbrand} filtercategory={filtercategory} cartChangeHandler={cartChangeHandler}/>
         </div>
       <div id="footer">Copyright © 2023 prefolo</div>
     </>

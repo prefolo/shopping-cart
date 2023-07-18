@@ -40,7 +40,7 @@ function App() {
 
           <Routes>
             <Route path="/" element={<Home cart={cart} setCart={setCart} />} />
-            <Route path="shop" element={<Shop cart={cart} cancelCartHandler={cancelCartHandler} cartChangeHandler={cartChangeHandler}/>} />
+            <Route path="shop" element={<Shop cart={cart} setCart={setCart} cancelCartHandler={cancelCartHandler} cartChangeHandler={cartChangeHandler}/>} />
           </Routes>
   )
 }

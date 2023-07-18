@@ -1,8 +1,15 @@
 import React, { useState } from 'react';
 import images from '../images';
 
-const Product = ({item, cartChangeHandler}) => {
-  const [itemcount, setItemcount] = useState(0);
+const Product = ({item, cart, cartChangeHandler}) => {
+let count = 0;
+
+for (const num of cart) {
+  if(num == item.id) count++;
+}
+console.log({cart,item_id:item.id,count})
+
+  const [itemcount, setItemcount] = useState(count);
 
   function incrementCount(e) {
     const newCount = itemcount+1;
