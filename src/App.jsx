@@ -1,28 +1,24 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useEffect } from 'react'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import './index.css'
 import './App.css'
-import ProductList from "./components/ProductList";
-import FilterBar from "./components/FilterBar";
-import Header from './components/Header';
-import { Purchasescontext } from './contexts/Purchasescontext';
+import './Shop.css'
+import Home from './components/Home';
+import Shop from './Shop';
 
 function App() {
-  const [filterbrand, setFilterbrand] = useState("All")
-  const [filtercategory, setFiltercategory] = useState("All")
-  const [productsincart, setProductsincart] = useState([])
+  const [cart, setCart] = useState([]);
 
-  function onChangeBrand(e) {
-    setFilterbrand(e.target.value)
-  }
+  useEffect(() => {
+    const data = window.localStorage.getItem('prefolo.github.shopping-cart.state');
+    if ( data !== null ) setCart(JSON.parse(data));
+  }, []);
 
-  function onChangeCategory(e) {
-    setFiltercategory(e.target.value)
-  }
-
-  function itemcountChangeHandler(id,count){ 
+  function cartChangeHandler(id,count){ 
     console.log({id,count})
-    console.log("productsincart prima dell'inserimento", productsincart)
+    console.log("cart prima dell'inserimento", cart)
 
-    const result = productsincart.filter(function(x) {
+    const result = cart.filter(function(x) {
       return x !== id;
     });
 
@@ -30,28 +26,24 @@ function App() {
 
     console.log( result.length, count, [...arr, ...result].length )
 
-    setProductsincart([...arr, ...result]);
+    const newCart = [...arr, ...result]; 
+    setCart(newCart);
+    window.localStorage.setItem('prefolo.github.shopping-cart.state', JSON.stringify(newCart));
+  }
+
+  function cancelCartHandler( ){ 
+    setCart([]);
+    window.localStorage.setItem('prefolo.github.shopping-cart.state', JSON.stringify(cart));
   }
 
   return (
-    <>
-      <div id="sticky-top-bar">
-        <Purchasescontext.Provider value={{ productsincart, setProductsincart }}>
-          <Header />
-        </Purchasescontext.Provider>
-        <div id="current-page-section">
-          <div id="title">Store</div>
-          <div id="filter-container">
-            <FilterBar onChangeBrand={onChangeBrand} onChangeCategory={onChangeCategory}/>
-          </div>
-        </div>
-      </div>
-      <div id="content">
-          <ProductList filterbrand={filterbrand} filtercategory={filtercategory} itemcountChangeHandler={itemcountChangeHandler}/>
-      </div>
-      <div id="footer">Copyright © 2023 prefolo</div>
-    </>
+
+          <Routes>
+            <Route path="/" element={<Home cart={cart} setCart={setCart} />} />
+            <Route path="shop" element={<Shop cart={cart} cancelCartHandler={cancelCartHandler} cartChangeHandler={cartChangeHandler}/>} />
+          </Routes>
   )
 }
 
 export default App
+

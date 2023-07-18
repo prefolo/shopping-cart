@@ -1,11 +1,8 @@
 import React, { useContext } from 'react';
-import { Purchasescontext } from '../contexts/Purchasescontext';
 
-const Header = ({cartcount}) => {
-    const { productsincart } = useContext(Purchasescontext)
-
+const Header = ({productsincart}) => {
     return ( 
-	  <>
+	    <>
         <div id="header">
           <p>Market Place</p>
           <div id="links-container">
@@ -14,7 +11,7 @@ const Header = ({cartcount}) => {
           </div>
           <button id="cart-button"><span className="material-symbols-outlined">shopping_cart</span> { productsincart.length }</button>
         </div>		  
-	  </>
+	    </>
   );
 };
 
