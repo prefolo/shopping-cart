@@ -4,14 +4,18 @@ import images from "../images";
 const Product = ({ item, cart, setCart, setItemIDsInCartHandler }) => {
   let count = 0;
 
+  const euroFormatter = new Intl.NumberFormat("it-IT", {
+    style: "currency",
+    currency: "EUR",
+  });
+
   for (const storedId of cart) if (storedId == item.id) count++;
 
   const [itemcount, setItemcount] = useState(-1);
 
   useEffect(() => {
-    // ciclare cart per impostare il colore sui boxe dei products
+    // cicla cart per impostare il colore sui box dei products
     const uniqueIds = [...new Set(cart)];
-
     const productBoxes = Array.from(document.querySelectorAll(".product"));
 
     uniqueIds.forEach((id) => {
@@ -19,9 +23,7 @@ const Product = ({ item, cart, setCart, setItemIDsInCartHandler }) => {
         (b) => b.dataset.productbox == id
       )[0];
 
-      console.log(productBox.dataset.productbox);
-
-      productBox.style.backgroundColor = "#9eff9e";
+      if (productBox) productBox.style.backgroundColor = "#9eff9e";
     });
   }, [cart]);
 
@@ -66,7 +68,9 @@ const Product = ({ item, cart, setCart, setItemIDsInCartHandler }) => {
       <p className="brand">{item.brand}</p>
 
       <img src={images[item.thumbnail]} />
-      <p className="price">{`${item.price} €`}</p>
+      <p className="price">{`${parseFloat(
+        euroFormatter.format(item.price)
+      )}`}</p>
       <div className="button-container">
         <button
           data-id={item.id}

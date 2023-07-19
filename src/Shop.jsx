@@ -14,6 +14,11 @@ function Shop({ cart, setCart, setItemIDsInCartHandler, cancelCartHandler }) {
 
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
 
+  const euroFormatter = new Intl.NumberFormat("it-IT", {
+    style: "currency",
+    currency: "EUR",
+  });
+
   const countOfIdsInCart = cart.reduce((obj, id) => {
     obj[id] = (obj[id] || 0) + 1;
     return obj;
@@ -29,14 +34,21 @@ function Shop({ cart, setCart, setItemIDsInCartHandler, cancelCartHandler }) {
     return [product, ...accArray];
   }, []);
 
-  const purchasesVoices = productsInCart.map((p) => (
+  let prds = [...productsInCart];
+  prds.sort((a, b) => {
+    return a.title.toLowerCase() > b.title.toLowerCase() ? 1 : -1;
+  });
+
+  const purchasesVoices = prds.map((p) => (
     <div key={p.id} className="cartVoiceItem">
       <div>
         <span>{p.countInCart}</span>
         &nbsp;x&nbsp;
         <span>{p.title}</span>
       </div>
-      <div>{p.priceInt * p.countInCart} €</div>
+      <div>
+        {parseFloat(euroFormatter.format(p.priceInt * p.countInCart))} €
+      </div>
     </div>
   ));
 
@@ -121,7 +133,9 @@ function Shop({ cart, setCart, setItemIDsInCartHandler, cancelCartHandler }) {
                 <div id="popover-container">
                   <p>Il tuo ordine</p>
                   <div id="purchases-box">{purchasesVoices}</div>
-                  <div id="tot">Importo Totale : {tot} €</div>
+                  <div id="tot">
+                    Importo Totale : {parseFloat(euroFormatter.format(tot))} €
+                  </div>
                   <button id="clear-purchase-order" onClick={clearOrder}>
                     Cancella Ordine
                   </button>
