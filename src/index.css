@@ -39,23 +39,29 @@ h1 {
   line-height: 1.1;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
+#cart-button {
+  xbackground-color: transparent;
+  appearance: none;
+  border:0;
+  border-radius: 100px;
+  xcolor: #aaa;
+  padding: 0.2em 0.7em;
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
-  background-color: #1a1a1a;
   cursor: pointer;
-  transition: border-color 0.25s;
+  xtransition: color 0.25s, background-color 0.25s;
+  min-width: 80px;
+  justify-content: space-between;
 }
-button:hover {
-  border-color: #646cff;
+#cart-button:hover {
+  xcolor: #000;
+  xbackground-color: #eee;
 }
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+#cart-button:focus,
+#cart-button:focus-visible {
+  xcolor: #000;
+  xbackground-color: #eee;
 }
 
 @media (prefers-color-scheme: light) {
@@ -65,9 +71,6 @@ button:focus-visible {
   }
   a:hover {
     color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
   }
 }
 

@@ -133,7 +133,6 @@
   display: flex;
   align-items: center;
   gap: 10px;
-  background: transparent;
 }
 
 .button-remove, .button-add {
