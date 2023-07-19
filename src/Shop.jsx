@@ -29,39 +29,44 @@ function Shop({ cart, setCart, setItemIDsInCartHandler, cancelCartHandler }) {
     return [product, ...accArray];
   }, []);
 
-  let popoverContent = productsInCart.map((p) => (
-    <li key={p.id}>
-      {p.title} : {p.countInCart}
-    </li>
+  const purchasesVoices = productsInCart.map((p) => (
+    <div key={p.id} className="cartVoiceItem">
+      <div>
+        <span>{p.countInCart}</span>
+        &nbsp;x&nbsp;
+        <span>{p.title}</span>
+      </div>
+      <div>{p.priceInt * p.countInCart} €</div>
+    </div>
   ));
+
+  const tot = productsInCart.reduce((acc, product) => {
+    return acc + product.priceInt * product.countInCart;
+  }, 0);
 
   useEffect(() => {
     const data = window.localStorage.getItem(
       "prefolo.github.shopping-cart.state"
     );
     if (data !== null) setCart(JSON.parse(data));
-
-    //setTimeout(() => setCartButtonColor(cart), 2000);
   }, []);
 
   useEffect(() => {
-    setCartButtonColor(cart);
+    toggleCartButtonStyle(cart);
   }, [cart]);
 
   function onChangeBrand(e) {
     setFilterbrand(e.target.value);
   }
 
-  function setCartButtonColor(cart) {
+  function toggleCartButtonStyle(cart) {
     const btn = document.getElementById("cart-button");
 
-    btn.style.color = "#aaa";
-    btn.style.backgroundColor = "#fff";
+    btn.classList.remove("fullCart");
+    btn.classList.remove("emptyCart");
 
-    if (cart.length > 0) {
-      btn.style.color = "#6c6c6c";
-      btn.style.backgroundColor = "#eee";
-    }
+    if (cart.length > 0) btn.classList.add("fullCart");
+    else btn.classList.add("emptyCart");
   }
 
   function onChangeCategory(e) {
@@ -74,6 +79,11 @@ function Shop({ cart, setCart, setItemIDsInCartHandler, cancelCartHandler }) {
 
   function navigateToShop() {
     navigate("/shop");
+  }
+
+  function clearOrder() {
+    cancelCartHandler();
+    setIsPopoverOpen(0);
   }
 
   return (
@@ -105,27 +115,26 @@ function Shop({ cart, setCart, setItemIDsInCartHandler, cancelCartHandler }) {
                 position={position}
                 childRect={childRect}
                 popoverRect={popoverRect}
-                arrowColor={"#9494ac"}
+                arrowColor={"#474d5a"}
                 arrowSize={8}
               >
-                <div
-                  style={{
-                    borderRadius: "10px",
-                    backgroundColor: "#9494ac",
-                    padding: "10px",
-                    boxShadow: "0px 6px 6px 0px rgba(0,0,0,0.5)",
-                  }}
-                >
-                  <u>{popoverContent}</u>
-                  <button>Cancella Ordine</button>
-                  <button>Acquista</button>
+                <div id="popover-container">
+                  <p>Il tuo ordine</p>
+                  <div id="purchases-box">{purchasesVoices}</div>
+                  <div id="tot">Importo Totale : {tot} €</div>
+                  <button id="clear-purchase-order" onClick={clearOrder}>
+                    Cancella Ordine
+                  </button>
+                  <button id="buy-purchase-order">Acquista</button>
                 </div>
               </ArrowContainer>
             )}
           >
             <button
               id="cart-button"
-              onClick={() => setIsPopoverOpen(!isPopoverOpen)}
+              onClick={() => {
+                if (cart.length > 0) setIsPopoverOpen(!isPopoverOpen);
+              }}
             >
               <span className="material-symbols-outlined">shopping_cart</span>{" "}
               {cart.length}
@@ -141,7 +150,6 @@ function Shop({ cart, setCart, setItemIDsInCartHandler, cancelCartHandler }) {
         </div>
       </div>
       <div id="content">
-        <button onClick={cancelCartHandler}>Cancel Cart</button>
         <ProductList
           cart={cart}
           setCart={setCart}

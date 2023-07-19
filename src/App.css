@@ -23,7 +23,7 @@
 }
 
 #current-page-section{
-  padding-left: 20px;
+  padding: 20px;
   background: #000000;
   display: flex;
   justify-content: space-between;
@@ -82,6 +82,16 @@
   margin: 150px 0;
 }
 
+
+#product-list-container button{
+  appearance: none;
+  border:0;
+  background: transparent;
+  cursor: pointer;
+  padding:0;
+  margin: 0 10px;
+}
+
 .product{
   display: flex;
   flex-direction: column;
@@ -135,14 +145,25 @@
   gap: 10px;
 }
 
-.button-remove, .button-add {
-  color: #777;
-}
 
 .button-container{
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.button-container button {
+  color: #777;
+  appearance: none;
+  border:0;
+  background: transparent;
+  cursor: pointer;
+  padding:0;
+  margin: 0 10px;
+}
+
+.button-container button:active {
+  color: #000;
 }
 
 .button-container input{
