@@ -26,7 +26,9 @@ const Home = ({ cart, setCart, cancelCartHandler }) => {
         cart={cart}
         setCart={setCart}
         cancelCartHandler={cancelCartHandler}
-      />
+      >
+        <div id="title">Home</div>
+      </Header>
       <div id="footer">Copyright © 2023 prefolo</div>
     </>
   );

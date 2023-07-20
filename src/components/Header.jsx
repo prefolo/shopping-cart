@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from "react";
+import React, { Children, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Popover, ArrowContainer } from "react-tiny-popover";
-import FilterBar from "./FilterBar";
 import data from "../data/products.json";
 
-const Header = ({ cart, setCart, cancelCartHandler }) => {
+const Header = ({ cart, setCart, cancelCartHandler, children }) => {
   const navigate = useNavigate();
 
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
@@ -62,10 +61,6 @@ const Header = ({ cart, setCart, cancelCartHandler }) => {
     toggleCartButtonStyle(cart);
   }, [cart]);
 
-  function onChangeBrand(e) {
-    setFilterbrand(e.target.value);
-  }
-
   function toggleCartButtonStyle(cart) {
     const btn = document.getElementById("cart-button");
 
@@ -74,10 +69,6 @@ const Header = ({ cart, setCart, cancelCartHandler }) => {
 
     if (cart.length > 0) btn.classList.add("fullCart");
     else btn.classList.add("emptyCart");
-  }
-
-  function onChangeCategory(e) {
-    setFiltercategory(e.target.value);
   }
 
   function navigateToHome() {
@@ -150,13 +141,7 @@ const Header = ({ cart, setCart, cancelCartHandler }) => {
             </button>
           </Popover>
         </div>
-        <div id="current-page-section">
-          <div id="title">Shop</div>
-          <FilterBar
-            onChangeBrand={onChangeBrand}
-            onChangeCategory={onChangeCategory}
-          />
-        </div>
+        <div id="current-page-section">{children}</div>
       </div>
     </>
   );
