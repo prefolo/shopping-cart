@@ -139,6 +139,10 @@
   text-align: center;
 }
 
+.product.selected {
+  background-color:#8bfb8b;
+}
+
 #cart-button{
   display: flex;
   align-items: center;

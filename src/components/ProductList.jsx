@@ -15,14 +15,14 @@ const ProductList = ({
   useEffect(() => {
     const productElements = Array.from(document.querySelectorAll(".product"));
 
-    productElements.forEach((p) => (p.style.backgroundColor = "#f6f6f6"));
+    productElements.forEach((p) => p.classList.remove("selected"));
 
     [...new Set(cart)].forEach((uniqueIdOfCart) => {
       const productEl = productElements.filter(
         (p) => p.dataset.product_id == uniqueIdOfCart
       )[0];
 
-      if (productEl) productEl.style.backgroundColor = "#9eff9e";
+      if (productEl) productEl.classList.add("selected");
     });
   }, [cart]);
 

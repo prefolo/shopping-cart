@@ -103,7 +103,7 @@ const Header = ({ cart, clearCart, children }) => {
                 <div id="popover-container">
                   <p>Il tuo ordine</p>
                   <div id="purchases-box">{listOfPurchases}</div>
-                  <div id="tot">Importo Totale : {formattedPrice(tot)} €</div>
+                  <div id="tot">{formattedPrice(tot)} €</div>
                   <button id="clear-purchase-order" onClick={clearOrder}>
                     Cancella Ordine
                   </button>
