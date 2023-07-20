@@ -15,7 +15,10 @@ const ProductList = ({
   useEffect(() => {
     const productElements = Array.from(document.querySelectorAll(".product"));
 
-    productElements.forEach((p) => p.classList.remove("selected"));
+    productElements.forEach((p) => {
+      p.classList.remove("selected");
+      if (cart.length == 0) p.querySelectorAll("input")[0].value = 0;
+    });
 
     [...new Set(cart)].forEach((uniqueIdOfCart) => {
       const productEl = productElements.filter(
