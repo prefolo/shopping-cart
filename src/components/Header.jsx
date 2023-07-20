@@ -4,7 +4,7 @@ import { Popover, ArrowContainer } from "react-tiny-popover";
 import data from "../data/products.json";
 import formattedPrice from "../utils/formattedPrice";
 
-const Header = ({ cart, setCart, clearCart, children }) => {
+const Header = ({ cart, clearCart, children }) => {
   const navigate = useNavigate();
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
 
@@ -118,8 +118,10 @@ const Header = ({ cart, setCart, clearCart, children }) => {
                 if (cart.length > 0) setIsPopoverOpen(!isPopoverOpen);
               }}
             >
-              <span className="material-symbols-outlined">shopping_cart</span>{" "}
-              {cart.length}
+              <span>{cart.length}</span>
+              <span className="material-symbols-outlined shopping-bag">
+                shopping_bag
+              </span>
             </button>
           </Popover>
         </div>

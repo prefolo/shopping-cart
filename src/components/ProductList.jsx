@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Product from "./Product";
 import data from "../data/products.json";
 
@@ -9,6 +9,23 @@ const ProductList = ({
   filtercategory,
   storeProductIdInCartCountTimes,
 }) => {
+  // Alla modifica di cart imposta i colori di background
+  // dei box dei prodotti.
+  // Grigio = non in cart. Verde = In cart.
+  useEffect(() => {
+    const productElements = Array.from(document.querySelectorAll(".product"));
+
+    productElements.forEach((p) => (p.style.backgroundColor = "#f6f6f6"));
+
+    [...new Set(cart)].forEach((uniqueIdOfCart) => {
+      const productEl = productElements.filter(
+        (p) => p.dataset.product_id == uniqueIdOfCart
+      )[0];
+
+      if (productEl) productEl.style.backgroundColor = "#9eff9e";
+    });
+  }, [cart]);
+
   let productsData = [...data.products];
 
   productsData.sort((a, b) => {

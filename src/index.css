@@ -48,7 +48,6 @@ h1 {
   font-weight: 500;
   font-family: inherit;
   cursor: pointer;
-  min-width: 80px;
   justify-content: space-between;
 }
 
@@ -59,9 +58,13 @@ h1 {
 }
 
 #cart-button.fullCart{
-  color : #4f4f4f;
   background-color : #eee;
   cursor: pointer;
+}
+
+.shopping-bag {
+  font-size: 30px;
+  margin-top: -5px;
 }
 
 @media (prefers-color-scheme: light) {

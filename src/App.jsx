@@ -29,6 +29,7 @@ function App() {
 
   function clearCart() {
     setCart([]);
+
     window.localStorage.setItem(
       "prefolo.github.shopping-cart.cart",
       JSON.stringify([])
