@@ -1,20 +1,45 @@
-import React from 'react'
-import Product from './Product'
-import data from '../data/products.json';
+import React from "react";
+import Product from "./Product";
+import data from "../data/products.json";
 
-const ProductList = ({cart, setCart, filterbrand,filtercategory,setItemIDsInCartHandler}) => {
-  let prds = [ ...data.products ];
-  prds.sort((a,b)=>{ return a.title.toLowerCase() > b.title.toLowerCase() ? 1 : -1 })
+const ProductList = ({
+  cart,
+  setCart,
+  filterbrand,
+  filtercategory,
+  storeProductIdInCartCountTimes,
+}) => {
+  let productsData = [...data.products];
 
-  const a = filterbrand != "All" ? prds.filter(p=>p.brand==filterbrand) : [...prds];
-  const b = filtercategory != "All" ? a.filter(p=>p.category==filtercategory) : 0;
-  const result = b ? [...b] : [...a];
+  productsData.sort((a, b) => {
+    return a.title.toLowerCase() > b.title.toLowerCase() ? 1 : -1;
+  });
 
-  const listItems = result.map(p => <Product key={p.id} item={p} cart={cart} setCart={setCart} setItemIDsInCartHandler={setItemIDsInCartHandler}/>)
+  const filteredByBrand_or_all =
+    filterbrand != "All"
+      ? productsData.filter((p) => p.brand == filterbrand)
+      : [...productsData];
 
-  return (
-    <div id='product-list-container'>{listItems}</div>
-  );
-}
+  const furtherFilteredByCategory =
+    filtercategory != "All"
+      ? filteredByBrand_or_all.filter((p) => p.category == filtercategory)
+      : 0;
+
+  const filteredProductsData = furtherFilteredByCategory
+    ? [...furtherFilteredByCategory]
+    : [...filteredByBrand_or_all];
+
+  const listOfProductsComponenents = filteredProductsData.map((p) => (
+    <Product
+      key={p.id}
+      productData={p}
+      cart={cart}
+      setCart={setCart}
+      storeProductIdInCartCountTimes={storeProductIdInCartCountTimes}
+    />
+  ));
+
+  return <div id="product-list-container">{listOfProductsComponenents}</div>;
+};
 
 export default ProductList;

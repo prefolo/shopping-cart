@@ -2,9 +2,9 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Popover, ArrowContainer } from "react-tiny-popover";
 import data from "../data/products.json";
-import formattedPrice from "../utils/PriceFormatter";
+import formattedPrice from "../utils/formattedPrice";
 
-const Header = ({ cart, setCart, cancelCartHandler, children }) => {
+const Header = ({ cart, setCart, clearCart, children }) => {
   const navigate = useNavigate();
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
 
@@ -13,7 +13,7 @@ const Header = ({ cart, setCart, cancelCartHandler, children }) => {
     return obj;
   }, {});
 
-  let productsInCart = [...new Set(cart)].reduce((accArray, uniqueId) => {
+  let dataOfProductsInCart = [...new Set(cart)].reduce((accArray, uniqueId) => {
     let product =
       accArray.filter((p) => p.id == uniqueId)[0] ||
       data.products.filter((p) => p.id == uniqueId)[0];
@@ -23,30 +23,23 @@ const Header = ({ cart, setCart, cancelCartHandler, children }) => {
     return [product, ...accArray];
   }, []);
 
-  productsInCart.sort((a, b) => {
+  dataOfProductsInCart.sort((a, b) => {
     return a.title.toLowerCase() > b.title.toLowerCase() ? 1 : -1;
   });
 
-  const purchasesVoices = productsInCart.map((p) => (
-    <div key={p.id} className="cartVoiceItem">
+  const listOfPurchases = dataOfProductsInCart.map((p) => (
+    <div key={p.id} className="cartOrderVoice">
       <div>
         <span>{p.title}</span>
-        <span class="purchaseTimes"> x {p.countInCart}</span>
+        <span className="purchaseTimes"> x {p.countInCart}</span>
       </div>
       <div>{formattedPrice(p.priceInt * p.countInCart)} €</div>
     </div>
   ));
 
-  const tot = productsInCart.reduce((acc, product) => {
+  const tot = dataOfProductsInCart.reduce((acc, product) => {
     return acc + product.priceInt * product.countInCart;
   }, 0);
-
-  useEffect(() => {
-    const data = window.localStorage.getItem(
-      "prefolo.github.shopping-cart.state"
-    );
-    if (data !== null) setCart(JSON.parse(data));
-  }, []);
 
   useEffect(() => {
     toggleCartButtonStyle(cart);
@@ -71,7 +64,7 @@ const Header = ({ cart, setCart, cancelCartHandler, children }) => {
   }
 
   function clearOrder() {
-    cancelCartHandler();
+    clearCart();
     setIsPopoverOpen(0);
   }
 
@@ -109,7 +102,7 @@ const Header = ({ cart, setCart, cancelCartHandler, children }) => {
               >
                 <div id="popover-container">
                   <p>Il tuo ordine</p>
-                  <div id="purchases-box">{purchasesVoices}</div>
+                  <div id="purchases-box">{listOfPurchases}</div>
                   <div id="tot">Importo Totale : {formattedPrice(tot)} €</div>
                   <button id="clear-purchase-order" onClick={clearOrder}>
                     Cancella Ordine

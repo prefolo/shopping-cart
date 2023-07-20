@@ -1,78 +1,50 @@
 import React, { useState, useEffect } from "react";
 import images from "../images";
-import formattedPrice from "../utils/PriceFormatter";
+import formattedPrice from "../utils/formattedPrice";
 
-const Product = ({ item, cart, setCart, setItemIDsInCartHandler }) => {
-  let count = 0;
+const Product = ({ productData, cart, storeProductIdInCartCountTimes }) => {
+  let initialProductCount = 0;
+  for (const id of cart) if (id == productData.id) initialProductCount++;
 
-  const euroFormatter = new Intl.NumberFormat("it-IT", {
-    style: "currency",
-    currency: "EUR",
-  });
-
-  for (const storedId of cart) if (storedId == item.id) count++;
-
-  const [itemcount, setItemcount] = useState(-1);
-
-  useEffect(() => {
-    // cicla cart per impostare il colore sui box dei products
-    const uniqueIds = [...new Set(cart)];
-    const productBoxes = Array.from(document.querySelectorAll(".product"));
-
-    uniqueIds.forEach((id) => {
-      const productBox = productBoxes.filter(
-        (b) => b.dataset.productbox == id
-      )[0];
-
-      if (productBox) productBox.style.backgroundColor = "#9eff9e";
-    });
-  }, [cart]);
+  const [productCountChangedByUI, setProductCountChangedByUI] = useState(-1);
 
   function incrementCount(e) {
-    const newCount = itemcount == -1 ? count + 1 : itemcount + 1;
+    const newCount =
+      productCountChangedByUI == -1
+        ? initialProductCount + 1
+        : productCountChangedByUI + 1;
 
-    setItemcount(newCount);
-    setItemIDsInCartHandler(e.currentTarget.dataset.id, newCount);
-
-    if (newCount > 0) {
-      const productBoxes = Array.from(document.querySelectorAll(".product"));
-
-      const productBox = productBoxes.filter(
-        (b) => b.dataset.productbox == item.id
-      )[0];
-
-      productBox.style.backgroundColor = "#9eff9e";
-    }
+    setProductCountChangedByUI(newCount);
+    storeProductIdInCartCountTimes(
+      e.currentTarget.dataset.product_id,
+      newCount
+    );
   }
 
   function decrementCount(e) {
-    const newCount = itemcount == -1 ? count - 1 : itemcount - 1;
+    const newCount =
+      productCountChangedByUI == -1
+        ? initialProductCount - 1
+        : productCountChangedByUI - 1;
     if (newCount == -1) return;
 
-    setItemcount(newCount);
-    setItemIDsInCartHandler(e.currentTarget.dataset.id, newCount);
-
-    if (newCount == 0) {
-      const productBoxes = Array.from(document.querySelectorAll(".product"));
-
-      const productBox = productBoxes.filter(
-        (b) => b.dataset.productbox == item.id
-      )[0];
-
-      productBox.style.backgroundColor = "#f6f6f6";
-    }
+    setProductCountChangedByUI(newCount);
+    storeProductIdInCartCountTimes(
+      e.currentTarget.dataset.product_id,
+      newCount
+    );
   }
 
   return (
-    <div className="product" data-productbox={item.id}>
-      <p className="title">{item.title}</p>
-      <p className="brand">{item.brand}</p>
+    <div className="product" data-product_id={productData.id}>
+      <p className="title">{productData.title}</p>
+      <p className="brand">{productData.brand}</p>
 
-      <img src={images[item.thumbnail]} />
-      <p className="price">{`${formattedPrice(item.price)} €`}</p>
+      <img src={images[productData.thumbnail]} />
+      <p className="price">{`${formattedPrice(productData.price)} €`}</p>
       <div className="button-container">
         <button
-          data-id={item.id}
+          data-product_id={productData.id}
           className="button-remove"
           onClick={decrementCount}
         >
@@ -87,20 +59,27 @@ const Product = ({ item, cart, setCart, setItemIDsInCartHandler }) => {
           </svg>
         </button>
         <input
-          data-id={item.id}
-          type="storedIdber"
+          data-product_id={productData.id}
+          type="number"
           min="0"
-          value={itemcount == -1 ? count : itemcount}
+          value={
+            productCountChangedByUI == -1
+              ? initialProductCount
+              : productCountChangedByUI
+          }
           onChange={(e) => {
             if (!e.target.value) return;
             const newCount = e.target.value * 1;
-            console.log(newCount);
-            setItemcount(newCount);
-            setItemIDsInCartHandler(e.target.dataset.id, newCount);
+
+            setProductCountChangedByUI(newCount);
+            storeProductIdInCartCountTimes(
+              e.target.dataset.product_id,
+              newCount
+            );
           }}
         />
         <button
-          data-id={item.id}
+          data-product_id={productData.id}
           className="button-add"
           onClick={incrementCount}
         >
