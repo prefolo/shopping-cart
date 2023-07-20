@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import images from "../images";
+import formattedPrice from "../utils/PriceFormatter";
 
 const Product = ({ item, cart, setCart, setItemIDsInCartHandler }) => {
   let count = 0;
@@ -68,9 +69,7 @@ const Product = ({ item, cart, setCart, setItemIDsInCartHandler }) => {
       <p className="brand">{item.brand}</p>
 
       <img src={images[item.thumbnail]} />
-      <p className="price">{`${parseFloat(
-        euroFormatter.format(item.price)
-      )}`}</p>
+      <p className="price">{`${formattedPrice(item.price)} €`}</p>
       <div className="button-container">
         <button
           data-id={item.id}

@@ -1,24 +1,19 @@
-import React, { Children, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Popover, ArrowContainer } from "react-tiny-popover";
 import data from "../data/products.json";
+import formattedPrice from "../utils/PriceFormatter";
 
 const Header = ({ cart, setCart, cancelCartHandler, children }) => {
   const navigate = useNavigate();
-
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
-
-  const euroFormatter = new Intl.NumberFormat("it-IT", {
-    style: "currency",
-    currency: "EUR",
-  });
 
   const countOfIdsInCart = cart.reduce((obj, id) => {
     obj[id] = (obj[id] || 0) + 1;
     return obj;
   }, {});
 
-  const productsInCart = [...new Set(cart)].reduce((accArray, uniqueId) => {
+  let productsInCart = [...new Set(cart)].reduce((accArray, uniqueId) => {
     let product =
       accArray.filter((p) => p.id == uniqueId)[0] ||
       data.products.filter((p) => p.id == uniqueId)[0];
@@ -28,21 +23,17 @@ const Header = ({ cart, setCart, cancelCartHandler, children }) => {
     return [product, ...accArray];
   }, []);
 
-  let prds = [...productsInCart];
-  prds.sort((a, b) => {
+  productsInCart.sort((a, b) => {
     return a.title.toLowerCase() > b.title.toLowerCase() ? 1 : -1;
   });
 
-  const purchasesVoices = prds.map((p) => (
+  const purchasesVoices = productsInCart.map((p) => (
     <div key={p.id} className="cartVoiceItem">
       <div>
-        <span>{p.countInCart}</span>
-        &nbsp;x&nbsp;
         <span>{p.title}</span>
+        <span class="purchaseTimes"> x {p.countInCart}</span>
       </div>
-      <div>
-        {parseFloat(euroFormatter.format(p.priceInt * p.countInCart))} €
-      </div>
+      <div>{formattedPrice(p.priceInt * p.countInCart)} €</div>
     </div>
   ));
 
@@ -119,9 +110,7 @@ const Header = ({ cart, setCart, cancelCartHandler, children }) => {
                 <div id="popover-container">
                   <p>Il tuo ordine</p>
                   <div id="purchases-box">{purchasesVoices}</div>
-                  <div id="tot">
-                    Importo Totale : {parseFloat(euroFormatter.format(tot))} €
-                  </div>
+                  <div id="tot">Importo Totale : {formattedPrice(tot)} €</div>
                   <button id="clear-purchase-order" onClick={clearOrder}>
                     Cancella Ordine
                   </button>
