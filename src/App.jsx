@@ -40,7 +40,16 @@ function App() {
 
   return (
     <Routes>
-      <Route path="/" element={<Home cart={cart} setCart={setCart} />} />
+      <Route
+        path="/"
+        element={
+          <Home
+            cart={cart}
+            setCart={setCart}
+            cancelCartHandler={cancelCartHandler}
+          />
+        }
+      />
       <Route
         path="shop"
         element={
