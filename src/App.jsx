@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
-import "./index.css";
-import "./App.css";
 import Home from "./pages/Home";
 import Shop from "./pages/Shop";
+import { CartContext } from "./contexts/CartContext";
+import "./index.css";
+import "./App.css";
 
 function App() {
   const [cart, setCart] = useState([]);
@@ -17,13 +18,16 @@ function App() {
 
   function storeProductIdInCartCountTimes(id, count) {
     const cartWithoutId = cart.filter((x) => x !== id);
-    const newCart = [...new Array(count).fill(id), ...cartWithoutId];
+    const cartWithIdCountTimes = [
+      ...new Array(count).fill(id),
+      ...cartWithoutId,
+    ];
 
-    setCart(newCart);
+    setCart(cartWithIdCountTimes);
 
     window.localStorage.setItem(
       "prefolo.github.shopping-cart.cart",
-      JSON.stringify(newCart)
+      JSON.stringify(cartWithIdCountTimes)
     );
   }
 
@@ -37,23 +41,14 @@ function App() {
   }
 
   return (
-    <Routes>
-      <Route
-        path="/"
-        element={<Home cart={cart} setCart={setCart} clearCart={clearCart} />}
-      />
-      <Route
-        path="shop"
-        element={
-          <Shop
-            cart={cart}
-            setCart={setCart}
-            clearCart={clearCart}
-            storeProductIdInCartCountTimes={storeProductIdInCartCountTimes}
-          />
-        }
-      />
-    </Routes>
+    <CartContext.Provider
+      value={{ cart, clearCart, storeProductIdInCartCountTimes }}
+    >
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="shop" element={<Shop />} />
+      </Routes>
+    </CartContext.Provider>
   );
 }
 

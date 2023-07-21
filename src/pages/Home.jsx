@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 
-const Home = ({ cart, setCart, clearCart }) => {
+const Home = () => {
   const navigate = useNavigate();
 
   function navigateToHome() {
@@ -16,7 +16,7 @@ const Home = ({ cart, setCart, clearCart }) => {
 
   return (
     <>
-      <Header cart={cart} setCart={setCart} clearCart={clearCart}>
+      <Header>
         <div id="title">Home</div>
       </Header>
       <Footer />

@@ -1,17 +1,13 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import Product from "./Product";
 import data from "../data/products.json";
+import { CartContext } from "../contexts/CartContext";
 
-const ProductList = ({
-  cart,
-  setCart,
-  filterbrand,
-  filtercategory,
-  storeProductIdInCartCountTimes,
-}) => {
-  // Alla modifica di cart imposta i colori di background
-  // dei box dei prodotti.
-  // Grigio = non in cart. Verde = In cart.
+const ProductList = ({ filterbrand, filtercategory }) => {
+  const { cart } = useContext(CartContext);
+
+  // Alla modifica di cart imposta la classe .selected sui box dei prodotti.
+  // Se cart è vuoto imposta il valore dell'<input> a 0
   useEffect(() => {
     const productElements = Array.from(document.querySelectorAll(".product"));
 
@@ -50,13 +46,7 @@ const ProductList = ({
     : [...filteredByBrand_or_all];
 
   const listOfProductsComponenents = filteredProductsData.map((p) => (
-    <Product
-      key={p.id}
-      productData={p}
-      cart={cart}
-      setCart={setCart}
-      storeProductIdInCartCountTimes={storeProductIdInCartCountTimes}
-    />
+    <Product key={p.id} productData={p} />
   ));
 
   return <div id="product-list-container">{listOfProductsComponenents}</div>;

@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { Popover, ArrowContainer } from "react-tiny-popover";
 import data from "../data/products.json";
 import formattedPrice from "../utils/formattedPrice";
+import { CartContext } from "../contexts/CartContext";
 
-const Header = ({ cart, clearCart, children }) => {
+const Header = ({ children }) => {
+  const { cart, clearCart } = useContext(CartContext);
+
   const navigate = useNavigate();
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
 

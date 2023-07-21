@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import ProductList from "../components/ProductList";
-import "./Shop.css";
 import Header from "../components/Header";
 import FilterBar from "../components/FilterBar";
+import ProductList from "../components/ProductList";
 import Footer from "../components/Footer";
+import "./Shop.css";
 
-function Shop({ cart, setCart, storeProductIdInCartCountTimes, clearCart }) {
+function Shop() {
   const [filterbrand, setFilterbrand] = useState("All");
   const [filtercategory, setFiltercategory] = useState("All");
 
@@ -19,7 +19,7 @@ function Shop({ cart, setCart, storeProductIdInCartCountTimes, clearCart }) {
 
   return (
     <>
-      <Header cart={cart} setCart={setCart} clearCart={clearCart}>
+      <Header>
         <div id="title">Shop</div>
         <FilterBar
           onChangeBrand={onChangeBrand}
@@ -28,11 +28,8 @@ function Shop({ cart, setCart, storeProductIdInCartCountTimes, clearCart }) {
       </Header>
       <div id="content">
         <ProductList
-          cart={cart}
-          setCart={setCart}
           filterbrand={filterbrand}
           filtercategory={filtercategory}
-          storeProductIdInCartCountTimes={storeProductIdInCartCountTimes}
         />
       </div>
       <Footer />

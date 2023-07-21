@@ -1,8 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import images from "../images";
 import formattedPrice from "../utils/formattedPrice";
+import { CartContext } from "../contexts/CartContext";
 
-const Product = ({ productData, cart, storeProductIdInCartCountTimes }) => {
+const Product = ({ productData }) => {
+  const { cart, storeProductIdInCartCountTimes } = useContext(CartContext);
+
   let initialProductCount = 0;
   for (const id of cart) if (id == productData.id) initialProductCount++;
 
