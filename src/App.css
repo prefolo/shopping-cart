@@ -54,11 +54,10 @@
 
 #content {
 	justify-content: center;
-	align-items: center;
+	align-items:flex-start;
 	flex: 1;
-
+  gap: 30px;
 	display: flex;
-	flex-direction: column;
 	color: var(--content-color);
 	background-color: var(--content-bg-color);
 }
@@ -189,4 +188,24 @@ input::-webkit-inner-spin-button {
 /* Firefox */
 input[type=number] {
   -moz-appearance: textfield;
+}
+
+
+#filter-box{
+  margin-top:150px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: sticky;
+  top: 200px;
+}
+
+fieldset {
+  background: #000;
+  color: #fff;
+  border: 0;
+}
+
+#filter-box label, #filter-box input{
+  cursor: pointer;
 }

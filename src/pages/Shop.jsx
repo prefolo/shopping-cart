@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Header from "../components/Header";
 import FilterBar from "../components/FilterBar";
+import FilterBox from "../components/FilterBox";
 import ProductList from "../components/ProductList";
 import Footer from "../components/Footer";
 import "./Shop.css";
@@ -17,6 +18,14 @@ function Shop() {
     setFiltercategory(e.target.value);
   }
 
+  function onChangeBrands(e) {
+    setFilterbrand(e.target.value);
+  }
+
+  function onChangeCategories(e) {
+    setFiltercategory(e.target.value);
+  }
+
   return (
     <>
       <Header>
@@ -30,6 +39,10 @@ function Shop() {
         <ProductList
           filterbrand={filterbrand}
           filtercategory={filtercategory}
+        />
+        <FilterBox
+          onChangeBrands={onChangeBrands}
+          onChangeCategories={onChangeCategories}
         />
       </div>
       <Footer />

@@ -36,12 +36,12 @@ const Header = ({ children }) => {
         <span>{p.title}</span>
         <span className="purchaseTimes"> x {p.countInCart}</span>
       </div>
-      <div>{formattedPrice(p.priceInt * p.countInCart)} €</div>
+      <div>{formattedPrice(p.price * p.countInCart)} €</div>
     </div>
   ));
 
   const tot = dataOfProductsInCart.reduce((acc, product) => {
-    return acc + product.priceInt * product.countInCart;
+    return acc + product.price * product.countInCart;
   }, 0);
 
   useEffect(() => {
