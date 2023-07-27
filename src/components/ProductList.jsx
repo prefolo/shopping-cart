@@ -3,7 +3,12 @@ import Product from "./Product";
 import data from "../data/products.json";
 import { CartContext } from "../contexts/CartContext";
 
-const ProductList = ({ filterbrand, filtercategory }) => {
+const ProductList = ({
+  checkedBrands,
+  checkedCategories,
+  brands,
+  categories,
+}) => {
   const { cart } = useContext(CartContext);
 
   // Alla modifica di cart imposta la classe .selected sui box dei prodotti.
@@ -26,24 +31,30 @@ const ProductList = ({ filterbrand, filtercategory }) => {
   }, [cart]);
 
   let productsData = [...data.products];
+  let brandFilteredProductsData = [];
+  let filteredProductsData = [];
 
-  productsData.sort((a, b) => {
-    return a.title.toLowerCase() > b.title.toLowerCase() ? 1 : -1;
+  checkedBrands.forEach((b, i) => {
+    if (b) {
+      brandFilteredProductsData = [
+        ...brandFilteredProductsData,
+        ...productsData.filter((p) => p.brand == brands[i]),
+      ];
+    }
   });
 
-  const filteredByBrand_or_all =
-    filterbrand != "All"
-      ? productsData.filter((p) => p.brand == filterbrand)
-      : [...productsData];
+  checkedCategories.forEach((c, i) => {
+    if (c) {
+      filteredProductsData = [
+        ...filteredProductsData,
+        ...brandFilteredProductsData.filter((p) => p.category == categories[i]),
+      ];
+    }
+  });
 
-  const furtherFilteredByCategory =
-    filtercategory != "All"
-      ? filteredByBrand_or_all.filter((p) => p.category == filtercategory)
-      : 0;
-
-  const filteredProductsData = furtherFilteredByCategory
-    ? [...furtherFilteredByCategory]
-    : [...filteredByBrand_or_all];
+  filteredProductsData.sort((a, b) => {
+    return a.title.toLowerCase() > b.title.toLowerCase() ? 1 : -1;
+  });
 
   const listOfProductsComponenents = filteredProductsData.map((p) => (
     <Product key={p.id} productData={p} />

@@ -1,35 +1,28 @@
 import React, { useState } from "react";
 import data from "../data/products.json";
 
-const FilterBox = ({ a, b }) => {
-  const brands = ["Tutto", ...new Set(data.products.map((p) => p.brand))];
-  const categories = [
-    "Tutto",
-    ...new Set(data.products.map((p) => p.category)),
-  ];
-
-  const [checkedBrandsState, setCheckedBrandsState] = useState(
-    new Array(brands.length).fill(true)
-  );
-
-  const [checkedCategoriesState, setCheckedCategoriesState] = useState(
-    new Array(categories.length).fill(true)
-  );
-
+const FilterBox = ({
+  checkedBrands,
+  checkedCategories,
+  setCheckedBrands,
+  setCheckedCategories,
+  brands,
+  categories,
+}) => {
   const onChangeBrands = (position) => {
-    const updatedCheckedState = checkedBrandsState.map((boolValue, index) =>
+    const updatedCheckedState = checkedBrands.map((boolValue, index) =>
       index === position ? !boolValue : boolValue
     );
 
-    setCheckedBrandsState(updatedCheckedState);
+    setCheckedBrands(updatedCheckedState);
   };
 
   const onChangeCategories = (position) => {
-    const updatedCheckedState = checkedCategoriesState.map((boolValue, index) =>
+    const updatedCheckedState = checkedCategories.map((boolValue, index) =>
       index === position ? !boolValue : boolValue
     );
 
-    setCheckedCategoriesState(updatedCheckedState);
+    setCheckedCategories(updatedCheckedState);
   };
 
   const checksBrands = brands.map((b, i) => {
@@ -40,7 +33,7 @@ const FilterBox = ({ a, b }) => {
           type="checkbox"
           id={b}
           name={b}
-          checked={checkedBrandsState[i]}
+          checked={checkedBrands[i]}
         />
         <label htmlFor={b}>{b}</label>
       </div>
@@ -58,21 +51,56 @@ const FilterBox = ({ a, b }) => {
           type="checkbox"
           id={c}
           name={c}
-          checked={checkedCategoriesState[i]}
+          checked={checkedCategories[i]}
         />
         <label htmlFor={c}>{b}</label>
       </div>
     );
   });
 
-  return (
-    <div id="filter-box">
-      <p>Filtra</p>
+  function checkBrandsHandler() {
+    setCheckedBrands(new Array(checkedBrands.length).fill(true));
+  }
 
-      <p>Marca</p>
-      <fieldset>{checksBrands}</fieldset>
-      <p>Categoria</p>
-      <fieldset>{checksCategories}</fieldset>
+  function uncheckBrandsHandler() {
+    setCheckedBrands(new Array(checkedBrands.length).fill(false));
+  }
+
+  function checkCategoriesHandler() {
+    setCheckedCategories(new Array(checkedCategories.length).fill(true));
+  }
+
+  function uncheckCategoriesHandler() {
+    setCheckedCategories(new Array(checkedCategories.length).fill(false));
+  }
+
+  return (
+    <div id="filters-container">
+      <div className="filter-box">
+        <p>Marca</p>
+        <fieldset id="brandFieldset">{checksBrands}</fieldset>
+        <div className="check-commands-container">
+          <a href="#" onClick={checkBrandsHandler}>
+            tutto
+          </a>
+          <a href="#" onClick={uncheckBrandsHandler}>
+            nessuno
+          </a>
+        </div>
+      </div>
+
+      <div className="filter-box">
+        <p>Categoria</p>
+        <fieldset id="categoryFieldset">{checksCategories}</fieldset>
+        <div className="check-commands-container">
+          <a href="#" onClick={checkCategoriesHandler}>
+            tutto
+          </a>
+          <a href="#" onClick={uncheckCategoriesHandler}>
+            nessuno
+          </a>
+        </div>
+      </div>
     </div>
   );
 };

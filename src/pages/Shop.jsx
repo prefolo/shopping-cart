@@ -1,48 +1,59 @@
 import React, { useState, useEffect } from "react";
 import Header from "../components/Header";
-import FilterBar from "../components/FilterBar";
+import data from "../data/products.json";
 import FilterBox from "../components/FilterBox";
 import ProductList from "../components/ProductList";
 import Footer from "../components/Footer";
 import "./Shop.css";
 
 function Shop() {
-  const [filterbrand, setFilterbrand] = useState("All");
-  const [filtercategory, setFiltercategory] = useState("All");
+  const brands = [...new Set(data.products.map((p) => p.brand))].sort(
+    (a, b) => {
+      return a < b ? -1 : 1;
+    }
+  );
 
-  function onChangeBrand(e) {
-    setFilterbrand(e.target.value);
-  }
+  const categories = [...new Set(data.products.map((p) => p.category))].sort(
+    (a, b) => {
+      return a < b ? -1 : 1;
+    }
+  );
 
-  function onChangeCategory(e) {
-    setFiltercategory(e.target.value);
-  }
+  const [checkedBrands, setCheckedBrands] = useState(
+    new Array(brands.length).fill(true)
+  );
+
+  const [checkedCategories, setCheckedCategories] = useState(
+    new Array(categories.length).fill(true)
+  );
 
   function onChangeBrands(e) {
-    setFilterbrand(e.target.value);
+    setCheckedBrands(e.target.value);
   }
 
   function onChangeCategories(e) {
-    setFiltercategory(e.target.value);
+    setCheckedCategories(e.target.value);
   }
 
   return (
     <>
       <Header>
         <div id="title">Shop</div>
-        <FilterBar
-          onChangeBrand={onChangeBrand}
-          onChangeCategory={onChangeCategory}
-        />
       </Header>
       <div id="content">
         <ProductList
-          filterbrand={filterbrand}
-          filtercategory={filtercategory}
+          checkedBrands={checkedBrands}
+          checkedCategories={checkedCategories}
+          brands={brands}
+          categories={categories}
         />
         <FilterBox
-          onChangeBrands={onChangeBrands}
-          onChangeCategories={onChangeCategories}
+          checkedBrands={checkedBrands}
+          checkedCategories={checkedCategories}
+          setCheckedBrands={setCheckedBrands}
+          setCheckedCategories={setCheckedCategories}
+          brands={brands}
+          categories={categories}
         />
       </div>
       <Footer />

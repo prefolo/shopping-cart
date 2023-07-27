@@ -32,10 +32,8 @@ const Header = ({ children }) => {
 
   const listOfPurchases = dataOfProductsInCart.map((p) => (
     <div key={p.id} className="cartOrderVoice">
-      <div>
-        <span>{p.title}</span>
-        <span className="purchaseTimes"> x {p.countInCart}</span>
-      </div>
+      <div>{p.title}</div>
+      <div className="purchaseTimes">x{p.countInCart}</div>
       <div>{formattedPrice(p.price * p.countInCart)} €</div>
     </div>
   ));

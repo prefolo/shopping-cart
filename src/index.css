@@ -58,7 +58,8 @@ h1 {
 }
 
 #cart-button.fullCart{
-  background-color : #eee;
+  color: #000;
+  background-color : #efefef;
   cursor: pointer;
 }
 
@@ -106,10 +107,11 @@ h1 {
 
 .cartOrderVoice{
   font: 18px Akshar, sans-serif;
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
   margin: 6px;
-  gap: 40px;
+  gap: 20px;
+  align-items: center;
 }
 
 #purchases-box{
@@ -117,6 +119,13 @@ h1 {
   padding: 10px;
   border-radius: 4px;
   background: #fff;
+}
+
+.purchaseTimes {
+  color: #7a7a7a;
+  border-radius: 100px;
+  padding: 0 4px;
+  font-size: 16px;
 }
 
 #clear-purchase-order, #buy-purchase-order{

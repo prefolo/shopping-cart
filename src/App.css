@@ -110,7 +110,7 @@
   padding: 20px 0;
   padding-bottom: 0;
   font-weight: 800;
-  color: #555555;
+  color: #000;
   text-align: center;
 }
 
@@ -191,7 +191,7 @@ input[type=number] {
 }
 
 
-#filter-box{
+#filters-container{
   margin-top:150px;
   display: flex;
   flex-direction: column;
@@ -201,11 +201,33 @@ input[type=number] {
 }
 
 fieldset {
-  background: #000;
-  color: #fff;
+  background: #fff;
+  color: #000;
   border: 0;
 }
 
-#filter-box label, #filter-box input{
+#filters-container label, #filters-container input{
   cursor: pointer;
+}
+
+.check-commands-container {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 6px;
+  font-size: 12px;
+}
+
+.filter-box{
+  border: 1px solid #ddd;
+}
+
+.filter-box p {
+  padding-left: 6px;
+  font-weight: bold;
+}
+
+fieldset div {
+  display: flex;
+  gap: 2px;
+  font-size: 14px;
 }
