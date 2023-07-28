@@ -8,6 +8,8 @@ const ProductList = ({
   checkedCategories,
   brands,
   categories,
+  productsSortOrder,
+  checkedSort,
 }) => {
   const { cart } = useContext(CartContext);
 
@@ -31,13 +33,13 @@ const ProductList = ({
   }, [cart]);
 
   let productsData = [...data.products];
-  let brandFilteredProductsData = [];
+  let filteredProductsDataByBrand = [];
   let filteredProductsData = [];
 
   checkedBrands.forEach((b, i) => {
     if (b) {
-      brandFilteredProductsData = [
-        ...brandFilteredProductsData,
+      filteredProductsDataByBrand = [
+        ...filteredProductsDataByBrand,
         ...productsData.filter((p) => p.brand == brands[i]),
       ];
     }
@@ -47,14 +49,31 @@ const ProductList = ({
     if (c) {
       filteredProductsData = [
         ...filteredProductsData,
-        ...brandFilteredProductsData.filter((p) => p.category == categories[i]),
+        ...filteredProductsDataByBrand.filter(
+          (p) => p.category == categories[i]
+        ),
       ];
     }
   });
 
+  let x = checkedSort ? 1 : -1;
+
   filteredProductsData.sort((a, b) => {
-    return a.title.toLowerCase() > b.title.toLowerCase() ? 1 : -1;
+    return a.title.toLowerCase() > b.title.toLowerCase() ? 1 * x : -1 * x;
   });
+
+  if (productsSortOrder == "brand")
+    filteredProductsData.sort((a, b) => {
+      return a[productsSortOrder].toLowerCase() >
+        b[productsSortOrder].toLowerCase()
+        ? 1 * x
+        : -1 * x;
+    });
+
+  if (productsSortOrder == "price")
+    filteredProductsData.sort((a, b) => {
+      return a[productsSortOrder] > b[productsSortOrder] ? 1 * x : -1 * x;
+    });
 
   const listOfProductsComponenents = filteredProductsData.map((p) => (
     <Product key={p.id} productData={p} />

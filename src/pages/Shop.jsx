@@ -27,6 +27,10 @@ function Shop() {
     new Array(categories.length).fill(true)
   );
 
+  const [productsSortOrder, setProductsSortOrder] = useState("title");
+
+  const [checkedSort, setCheckedSort] = useState(true);
+
   function onChangeBrands(e) {
     setCheckedBrands(e.target.value);
   }
@@ -46,14 +50,20 @@ function Shop() {
           checkedCategories={checkedCategories}
           brands={brands}
           categories={categories}
+          productsSortOrder={productsSortOrder}
+          checkedSort={checkedSort}
         />
         <FilterBox
+          productsSortOrder={productsSortOrder}
+          setProductsSortOrder={setProductsSortOrder}
           checkedBrands={checkedBrands}
           checkedCategories={checkedCategories}
           setCheckedBrands={setCheckedBrands}
           setCheckedCategories={setCheckedCategories}
           brands={brands}
           categories={categories}
+          checkedSort={checkedSort}
+          setCheckedSort={setCheckedSort}
         />
       </div>
       <Footer />

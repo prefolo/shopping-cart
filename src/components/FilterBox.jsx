@@ -8,6 +8,10 @@ const FilterBox = ({
   setCheckedCategories,
   brands,
   categories,
+  productsSortOrder,
+  setProductsSortOrder,
+  checkedSort,
+  setCheckedSort,
 }) => {
   const onChangeBrands = (position) => {
     const updatedCheckedState = checkedBrands.map((boolValue, index) =>
@@ -23,6 +27,10 @@ const FilterBox = ({
     );
 
     setCheckedCategories(updatedCheckedState);
+  };
+
+  const onChangeSort = () => {
+    setCheckedSort(!checkedSort);
   };
 
   const checksBrands = brands.map((b, i) => {
@@ -75,33 +83,61 @@ const FilterBox = ({
   }
 
   return (
-    <div id="filters-container">
-      <div className="filter-box">
-        <p>Marca</p>
-        <fieldset id="brandFieldset">{checksBrands}</fieldset>
-        <div className="check-commands-container">
-          <a href="#" onClick={checkBrandsHandler}>
-            tutto
-          </a>
-          <a href="#" onClick={uncheckBrandsHandler}>
-            nessuno
-          </a>
+    <>
+      <div id="filters-container">
+        <div id="sort-select-box">
+          Ordina per
+          <br />
+          <br />
+          <div id="sort-container">
+            <select
+              id="sort-select"
+              value={productsSortOrder}
+              onChange={(e) => setProductsSortOrder(e.target.value)}
+            >
+              <option value="title">Nome</option>
+              <option value="brand">Marca</option>
+              <option value="price">Prezzo</option>
+            </select>
+            <input
+              onChange={() => {
+                onChangeSort();
+              }}
+              type="checkbox"
+              id="sort-checkbox"
+              checked={checkedSort}
+              name="sort-checkbox"
+            />
+            <label className="checkLabel" htmlFor="sort-checkbox"></label>
+          </div>
+        </div>
+        Filtra
+        <div className="filter-box">
+          <p>Marca</p>
+          <fieldset id="brandFieldset">{checksBrands}</fieldset>
+          <div className="check-commands-container">
+            <a href="#" onClick={checkBrandsHandler}>
+              tutto
+            </a>
+            <a href="#" onClick={uncheckBrandsHandler}>
+              nessuno
+            </a>
+          </div>
+        </div>
+        <div className="filter-box">
+          <p>Categoria</p>
+          <fieldset id="categoryFieldset">{checksCategories}</fieldset>
+          <div className="check-commands-container">
+            <a href="#" onClick={checkCategoriesHandler}>
+              tutto
+            </a>
+            <a href="#" onClick={uncheckCategoriesHandler}>
+              nessuno
+            </a>
+          </div>
         </div>
       </div>
-
-      <div className="filter-box">
-        <p>Categoria</p>
-        <fieldset id="categoryFieldset">{checksCategories}</fieldset>
-        <div className="check-commands-container">
-          <a href="#" onClick={checkCategoriesHandler}>
-            tutto
-          </a>
-          <a href="#" onClick={uncheckCategoriesHandler}>
-            nessuno
-          </a>
-        </div>
-      </div>
-    </div>
+    </>
   );
 };
 

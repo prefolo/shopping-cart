@@ -231,3 +231,25 @@ fieldset div {
   gap: 2px;
   font-size: 14px;
 }
+
+#sort-select{
+  width: 100%;
+}
+
+#sort-checkbox {
+  display: none;
+}
+.checkLabel {
+  display: inline-block;
+  padding: 10px;
+  background: url("images/ascending.png") no-repeat left center;
+  padding-left: 15px;
+}
+#sort-checkbox:checked + .checkLabel {
+  background-image: url("images/descending.png");
+}
+
+#sort-container{
+  display: flex;
+  gap: 6px;
+}
