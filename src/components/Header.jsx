@@ -31,11 +31,11 @@ const Header = ({ children }) => {
   });
 
   const listOfPurchases = dataOfProductsInCart.map((p) => (
-    <div key={p.id} className="cartOrderVoice">
+    <>
       <div>{p.title}</div>
       <div className="purchaseTimes">x{p.countInCart}</div>
       <div>{formattedPrice(p.price * p.countInCart)} €</div>
-    </div>
+    </>
   ));
 
   const tot = dataOfProductsInCart.reduce((acc, product) => {

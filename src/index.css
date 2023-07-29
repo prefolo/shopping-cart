@@ -119,12 +119,14 @@ h1 {
   padding: 10px;
   border-radius: 4px;
   background: #fff;
+  display: grid;
+  grid-template-columns: auto auto auto;
 }
 
 .purchaseTimes {
   color: #7a7a7a;
   border-radius: 100px;
-  padding: 0 4px;
+  padding: 0 30px;
   font-size: 16px;
 }
 
