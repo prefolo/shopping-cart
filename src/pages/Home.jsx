@@ -15,12 +15,11 @@ const Home = () => {
   }
 
   return (
-    <>
-      <Header>
-        <div id="title">Home</div>
-      </Header>
+    <div>
+      <Header></Header>
+      <div id="content"></div>
       <Footer />
-    </>
+    </div>
   );
 };
 

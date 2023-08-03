@@ -5,11 +5,14 @@ import data from "../data/products.json";
 import formattedPrice from "../utils/formattedPrice";
 import { CartContext } from "../contexts/CartContext";
 
-const Header = ({ children }) => {
+const Header = () => {
   const { cart, clearCart } = useContext(CartContext);
 
   const navigate = useNavigate();
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
+
+  const [homelinkClass, setHomelinkClass] = useState("current-link");
+  const [shoplinkClass, setShoplinkClass] = useState("");
 
   const countOfIdsInCart = cart.reduce((obj, id) => {
     obj[id] = (obj[id] || 0) + 1;
@@ -57,10 +60,16 @@ const Header = ({ children }) => {
   }
 
   function navigateToHome() {
+    setHomelinkClass("current-link");
+    setShoplinkClass("");
+
     navigate("/");
   }
 
   function navigateToShop() {
+    setShoplinkClass("current-link");
+    setHomelinkClass("");
+
     navigate("/shop");
   }
 
@@ -75,12 +84,12 @@ const Header = ({ children }) => {
         <div id="header">
           <p>Market Place</p>
           <div id="links-container">
-            <p>
+            <p className={homelinkClass}>
               <a href="#" onClick={navigateToHome}>
                 Home
               </a>
             </p>
-            <p>
+            <p className={shoplinkClass}>
               <a href="#" onClick={navigateToShop}>
                 Shop
               </a>
@@ -119,14 +128,13 @@ const Header = ({ children }) => {
                 if (cart.length > 0) setIsPopoverOpen(!isPopoverOpen);
               }}
             >
-              <span>{cart.length}</span>
+              <span id="cart-button-count">{cart.length}</span>
               <span className="material-symbols-outlined shopping-bag">
                 shopping_bag
               </span>
             </button>
           </Popover>
         </div>
-        <div id="current-page-section">{children}</div>
       </div>
     </>
   );

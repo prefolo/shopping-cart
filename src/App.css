@@ -12,19 +12,24 @@
 }
 
 #header{
-  font: 18px Akshar, sans-serif;
+  font-size: 22px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px;
-  color: var(--header-color);
-  background-color: #fff;
-  border-bottom: 1px solid #eee;
+  padding: 0 20px;
+  background-color: #ffffffeb;
+  color: #333;
+}
+
+
+#header > p{
+  color: #777;
+  font-size: 22px;
 }
 
 #current-page-section{
   padding: 20px;
-  background: #000000;
+  background: #ffffffb5;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -32,7 +37,7 @@
 
 #title{
   font: 30px Arial;
-  color: #fff;
+  color: #000;
 }
 
 #filter-bar{
@@ -56,7 +61,7 @@
 	justify-content: center;
 	align-items:flex-start;
 	flex: 1;
-  gap: 30px;
+  gap: 50px;
 	display: flex;
 	color: var(--content-color);
 	background-color: var(--content-bg-color);
@@ -67,8 +72,7 @@
 	justify-content: center;
 	align-items: center;
 	padding: 20px;
-	color: var(--footer-color);
-	background-color: var(--footer-bg-color);
+	color: #888;
 }
 
 #product-list-container{
@@ -146,6 +150,12 @@
   display: flex;
   align-items: center;
   gap: 2px;
+}
+
+
+#cart-button-count {
+  font-family: Akshar;
+  font-size: 18px;
 }
 
 
@@ -252,4 +262,15 @@ fieldset div {
 #sort-container{
   display: flex;
   gap: 6px;
+}
+
+
+#links-container p{
+  color: #fff;
+  font-size: 18px;
+  padding: 22px 40px;
+}
+
+.current-link{
+  border-bottom: 2px solid #8ca5bd;
 }

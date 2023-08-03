@@ -41,9 +41,7 @@ function Shop() {
 
   return (
     <>
-      <Header>
-        <div id="title">Shop</div>
-      </Header>
+      <Header />
       <div id="content">
         <ProductList
           checkedBrands={checkedBrands}
