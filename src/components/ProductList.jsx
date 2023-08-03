@@ -62,7 +62,7 @@ const ProductList = ({
     return a.title.toLowerCase() > b.title.toLowerCase() ? 1 * x : -1 * x;
   });
 
-  if (productsSortOrder == "brand")
+  if (productsSortOrder == "brand" || productsSortOrder == "category")
     filteredProductsData.sort((a, b) => {
       return a[productsSortOrder].toLowerCase() >
         b[productsSortOrder].toLowerCase()

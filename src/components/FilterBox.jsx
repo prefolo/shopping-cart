@@ -98,6 +98,7 @@ const FilterBox = ({
               <option value="title">Nome</option>
               <option value="brand">Marca</option>
               <option value="price">Prezzo</option>
+              <option value="category">Categoria</option>
             </select>
             <input
               onChange={() => {
