@@ -1,22 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Header from "../components/Header";
 import data from "../data/products.json";
 import FilterBox from "../components/FilterBox";
 import ProductList from "../components/ProductList";
 import Footer from "../components/Footer";
-import "./Shop.css";
 
 function Shop() {
-  const brands = [...new Set(data.products.map((p) => p.brand))].sort(
-    (a, b) => {
-      return a < b ? -1 : 1;
-    }
+  const brands = [...new Set(data.products.map((p) => p.brand))].sort((a, b) =>
+    a < b ? -1 : 1
   );
 
   const categories = [...new Set(data.products.map((p) => p.category))].sort(
-    (a, b) => {
-      return a < b ? -1 : 1;
-    }
+    (a, b) => (a < b ? -1 : 1)
   );
 
   const [checkedBrands, setCheckedBrands] = useState(
@@ -27,7 +22,7 @@ function Shop() {
     new Array(categories.length).fill(true)
   );
 
-  const [productsSortOrder, setProductsSortOrder] = useState("title");
+  const [sortOrder, setSortOrder] = useState("title");
 
   const [checkedSort, setCheckedSort] = useState(true);
 
@@ -41,19 +36,19 @@ function Shop() {
 
   return (
     <>
-      <Header />
+      <Header isHome={false} />
       <div id="content">
         <ProductList
           checkedBrands={checkedBrands}
           checkedCategories={checkedCategories}
           brands={brands}
           categories={categories}
-          productsSortOrder={productsSortOrder}
+          sortOrder={sortOrder}
           checkedSort={checkedSort}
         />
         <FilterBox
-          productsSortOrder={productsSortOrder}
-          setProductsSortOrder={setProductsSortOrder}
+          sortOrder={sortOrder}
+          setSortOrder={setSortOrder}
           checkedBrands={checkedBrands}
           checkedCategories={checkedCategories}
           setCheckedBrands={setCheckedBrands}

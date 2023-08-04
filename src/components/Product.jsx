@@ -4,7 +4,7 @@ import formattedPrice from "../utils/formattedPrice";
 import { CartContext } from "../contexts/CartContext";
 
 const Product = ({ productData }) => {
-  const { cart, storeProductIdInCartCountTimes } = useContext(CartContext);
+  const { cart, storeProductIdInCartNtimes } = useContext(CartContext);
 
   let initialProductCount = 0;
   for (const id of cart) if (id == productData.id) initialProductCount++;
@@ -12,16 +12,16 @@ const Product = ({ productData }) => {
   const [productCountChangedByUI, setProductCountChangedByUI] = useState(-1);
 
   function incrementCount(e) {
+    initialProductCount = 0;
+    for (const id of cart) if (id == productData.id) initialProductCount++;
+
     const newCount =
       productCountChangedByUI == -1
         ? initialProductCount + 1
         : productCountChangedByUI + 1;
 
     setProductCountChangedByUI(newCount);
-    storeProductIdInCartCountTimes(
-      e.currentTarget.dataset.product_id,
-      newCount
-    );
+    storeProductIdInCartNtimes(e.currentTarget.dataset.product_id, newCount);
   }
 
   function decrementCount(e) {
@@ -32,10 +32,7 @@ const Product = ({ productData }) => {
     if (newCount == -1) return;
 
     setProductCountChangedByUI(newCount);
-    storeProductIdInCartCountTimes(
-      e.currentTarget.dataset.product_id,
-      newCount
-    );
+    storeProductIdInCartNtimes(e.currentTarget.dataset.product_id, newCount);
   }
 
   return (
@@ -75,10 +72,7 @@ const Product = ({ productData }) => {
             const newCount = e.target.value * 1;
 
             setProductCountChangedByUI(newCount);
-            storeProductIdInCartCountTimes(
-              e.target.dataset.product_id,
-              newCount
-            );
+            storeProductIdInCartNtimes(e.target.dataset.product_id, newCount);
           }}
         />
         <button

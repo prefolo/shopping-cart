@@ -5,16 +5,13 @@ import data from "../data/products.json";
 import formattedPrice from "../utils/formattedPrice";
 import { CartContext } from "../contexts/CartContext";
 
-const Header = () => {
+const Header = ({ isHome }) => {
   const { cart, clearCart } = useContext(CartContext);
 
   const navigate = useNavigate();
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
 
-  const [homelinkClass, setHomelinkClass] = useState("current-link");
-  const [shoplinkClass, setShoplinkClass] = useState("");
-
-  const countOfIdsInCart = cart.reduce((obj, id) => {
+  const map_id_count = cart.reduce((obj, id) => {
     obj[id] = (obj[id] || 0) + 1;
     return obj;
   }, {});
@@ -24,7 +21,7 @@ const Header = () => {
       accArray.filter((p) => p.id == uniqueId)[0] ||
       data.products.filter((p) => p.id == uniqueId)[0];
 
-    product.countInCart = countOfIdsInCart[product.id];
+    product.countInCart = map_id_count[product.id];
 
     return [product, ...accArray];
   }, []);
@@ -36,8 +33,12 @@ const Header = () => {
   const listOfPurchases = dataOfProductsInCart.map((p) => (
     <>
       <div>{p.title}</div>
-      <div className="purchaseTimes">x{p.countInCart}</div>
-      <div>{formattedPrice(p.price * p.countInCart)} €</div>
+      <div className="purchaseTimes">
+        {p.price}€ x {p.countInCart}
+      </div>
+      <div className="purchaseTotals">
+        {formattedPrice(p.price * p.countInCart)} €
+      </div>
     </>
   ));
 
@@ -60,16 +61,10 @@ const Header = () => {
   }
 
   function navigateToHome() {
-    setHomelinkClass("current-link");
-    setShoplinkClass("");
-
     navigate("/");
   }
 
   function navigateToShop() {
-    setShoplinkClass("current-link");
-    setHomelinkClass("");
-
     navigate("/shop");
   }
 
@@ -80,16 +75,16 @@ const Header = () => {
 
   return (
     <>
-      <div id="sticky-top-bar">
+      <div id="header-container">
         <div id="header">
           <p>Market Place</p>
           <div id="links-container">
-            <p className={homelinkClass}>
+            <p className={isHome ? "current-link" : ""}>
               <a href="#" onClick={navigateToHome}>
                 Home
               </a>
             </p>
-            <p className={shoplinkClass}>
+            <p className={isHome ? "" : "current-link"}>
               <a href="#" onClick={navigateToShop}>
                 Shop
               </a>
@@ -127,6 +122,7 @@ const Header = () => {
               onClick={() => {
                 if (cart.length > 0) setIsPopoverOpen(!isPopoverOpen);
               }}
+              className={isPopoverOpen ? "active" : ""}
             >
               <span id="cart-button-count">{cart.length}</span>
               <span className="material-symbols-outlined shopping-bag">

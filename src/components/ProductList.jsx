@@ -8,13 +8,11 @@ const ProductList = ({
   checkedCategories,
   brands,
   categories,
-  productsSortOrder,
+  sortOrder,
   checkedSort,
 }) => {
   const { cart } = useContext(CartContext);
 
-  // Alla modifica di cart imposta la classe .selected sui box dei prodotti.
-  // Se cart è vuoto imposta il valore dell'<input> a 0
   useEffect(() => {
     const productElements = Array.from(document.querySelectorAll(".product"));
 
@@ -62,17 +60,16 @@ const ProductList = ({
     return a.title.toLowerCase() > b.title.toLowerCase() ? 1 * x : -1 * x;
   });
 
-  if (productsSortOrder == "brand" || productsSortOrder == "category")
+  if (sortOrder == "brand" || sortOrder == "category")
     filteredProductsData.sort((a, b) => {
-      return a[productsSortOrder].toLowerCase() >
-        b[productsSortOrder].toLowerCase()
+      return a[sortOrder].toLowerCase() > b[sortOrder].toLowerCase()
         ? 1 * x
         : -1 * x;
     });
 
-  if (productsSortOrder == "price")
+  if (sortOrder == "price")
     filteredProductsData.sort((a, b) => {
-      return a[productsSortOrder] > b[productsSortOrder] ? 1 * x : -1 * x;
+      return a[sortOrder] > b[sortOrder] ? 1 * x : -1 * x;
     });
 
   const listOfProductsComponenents = filteredProductsData.map((p) => (

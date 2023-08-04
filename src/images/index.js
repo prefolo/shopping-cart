@@ -16,7 +16,6 @@ import miband6 from './miband6.png';
 import samsunggalaxywatch5 from './samsunggalaxywatch5.png';
 
 
-
 export default {
   iphone14pro,
   pixel7pro,

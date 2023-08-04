@@ -3,7 +3,6 @@ import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import Shop from "./pages/Shop";
 import { CartContext } from "./contexts/CartContext";
-import "./index.css";
 import "./App.css";
 
 function App() {
@@ -16,18 +15,15 @@ function App() {
     if (data !== null) setCart(JSON.parse(data));
   }, []);
 
-  function storeProductIdInCartCountTimes(id, count) {
+  function storeProductIdInCartNtimes(id, n) {
     const cartWithoutId = cart.filter((x) => x !== id);
-    const cartWithIdCountTimes = [
-      ...new Array(count).fill(id),
-      ...cartWithoutId,
-    ];
+    const cartWithIdNtimes = [...new Array(n).fill(id), ...cartWithoutId];
 
-    setCart(cartWithIdCountTimes);
+    setCart(cartWithIdNtimes);
 
     window.localStorage.setItem(
       "prefolo.github.shopping-cart.cart",
-      JSON.stringify(cartWithIdCountTimes)
+      JSON.stringify(cartWithIdNtimes)
     );
   }
 
@@ -42,7 +38,11 @@ function App() {
 
   return (
     <CartContext.Provider
-      value={{ cart, clearCart, storeProductIdInCartCountTimes }}
+      value={{
+        cart,
+        clearCart,
+        storeProductIdInCartNtimes,
+      }}
     >
       <Routes>
         <Route path="/" element={<Home />} />

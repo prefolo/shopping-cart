@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import data from "../data/products.json";
 
 const FilterBox = ({
   checkedBrands,
@@ -8,8 +7,8 @@ const FilterBox = ({
   setCheckedCategories,
   brands,
   categories,
-  productsSortOrder,
-  setProductsSortOrder,
+  sortOrder,
+  setSortOrder,
   checkedSort,
   setCheckedSort,
 }) => {
@@ -92,8 +91,8 @@ const FilterBox = ({
           <div id="sort-container">
             <select
               id="sort-select"
-              value={productsSortOrder}
-              onChange={(e) => setProductsSortOrder(e.target.value)}
+              value={sortOrder}
+              onChange={(e) => setSortOrder(e.target.value)}
             >
               <option value="title">Nome</option>
               <option value="brand">Marca</option>

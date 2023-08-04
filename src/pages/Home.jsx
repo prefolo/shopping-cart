@@ -1,25 +1,16 @@
-import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import React from "react";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 
 const Home = () => {
-  const navigate = useNavigate();
-
-  function navigateToHome() {
-    navigate("/");
-  }
-
-  function navigateToShop() {
-    navigate("shop");
-  }
-
   return (
-    <div>
-      <Header></Header>
-      <div id="content"></div>
+    <>
+      <Header isHome={true}></Header>
+      <div id="content" className="home-content">
+        <img id="home-img" src="/src/images/home.jpg" alt="Your Shop Online" />
+      </div>
       <Footer />
-    </div>
+    </>
   );
 };
 
