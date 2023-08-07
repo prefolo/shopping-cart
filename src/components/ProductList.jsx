@@ -28,7 +28,7 @@ const ProductList = ({
 
       if (productEl) productEl.classList.add("selected");
     });
-  }, [cart]);
+  }, [cart, checkedBrands, checkedCategories]);
 
   let productsData = [...data.products];
   let filteredProductsDataByBrand = [];
