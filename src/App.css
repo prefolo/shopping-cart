@@ -146,6 +146,7 @@ body {
 	display: flex;
 	color: var(--content-color);
 	background-color: var(--content-bg-color);
+  margin: 0 30px;
 }
 
 #content.home-content{

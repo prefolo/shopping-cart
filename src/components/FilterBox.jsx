@@ -85,7 +85,7 @@ const FilterBox = ({
     <>
       <div id="filters-container">
         <div id="sort-select-box">
-          Ordina per
+          Sorting
           <br />
           <br />
           <div id="sort-container">
@@ -94,10 +94,10 @@ const FilterBox = ({
               value={sortOrder}
               onChange={(e) => setSortOrder(e.target.value)}
             >
-              <option value="title">Nome</option>
-              <option value="brand">Marca</option>
-              <option value="price">Prezzo</option>
-              <option value="category">Categoria</option>
+              <option value="title">Name</option>
+              <option value="brand">Brand</option>
+              <option value="price">Price</option>
+              <option value="category">Category</option>
             </select>
             <input
               onChange={() => {
@@ -111,28 +111,28 @@ const FilterBox = ({
             <label className="checkLabel" htmlFor="sort-checkbox"></label>
           </div>
         </div>
-        Filtra
+        Filter
         <div className="filter-box">
-          <p>Marca</p>
+          <p>Brand</p>
           <fieldset id="brandFieldset">{checksBrands}</fieldset>
           <div className="check-commands-container">
             <a href="#" onClick={checkBrandsHandler}>
-              tutto
+              all
             </a>
             <a href="#" onClick={uncheckBrandsHandler}>
-              nessuno
+              none
             </a>
           </div>
         </div>
         <div className="filter-box">
-          <p>Categoria</p>
+          <p>Category</p>
           <fieldset id="categoryFieldset">{checksCategories}</fieldset>
           <div className="check-commands-container">
             <a href="#" onClick={checkCategoriesHandler}>
-              tutto
+              all
             </a>
             <a href="#" onClick={uncheckCategoriesHandler}>
-              nessuno
+              none
             </a>
           </div>
         </div>
